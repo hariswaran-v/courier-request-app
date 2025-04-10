@@ -1,0 +1,8 @@
+.custom-box {
+  background-color: #e5e7eb; /* Equivalent to bg-gray-200 */
+  padding: 8px; /* Equivalent to p-2 */
+  border-radius: 4px; /* Equivalent to rounded */
+  margin-top: 16px; /* Equivalent to mt-4 */
+  width: 100%; /* Equivalent to w-full */
+  outline: none;
+}
