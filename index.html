@@ -10,34 +10,53 @@
   <body>
     <div class="bg-orange-500 min-h-screen p-10">
       <div class="bg-white p-5 rounded max-w-lg mx-auto">
-        <h4 class="font-semibold text-xl">Request a Courier Pickup!</h4>
-        <div class="space-y-4">
-          <div class="grid grid-cols-2 gap-5">
-            <input type="text" placeholder="Name" class="custom-box" />
+        <h4 class="font-semibold text-xl">
+          Request a <span class="text-orange-500">Courier Pickup!</span>
+        </h4>
+        <form class="space-y-2" id="courier-req-form">
+          <div class="grid grid-cols-2 gap-x-5">
             <input
-              type="number"
-              min="0"
+              type="text"
+              placeholder="Name"
+              id="name"
+              class="custom-box"
+              required
+            />
+            <input
+              type="text"
+              id="mobile"
               placeholder="Phone"
               class="custom-box"
+              required
             />
           </div>
-          <input type="datetime-local" class="custom-box" />
-          <textarea
-            name="text-area"
-            id="text-area"
-            class="custom-box"
-            cols="30"
-            rows="4"
-          ></textarea>
+          <div>
+            <input
+              type="datetime-local"
+              class="custom-box"
+              required
+              id="date"
+            />
+          </div>
+          <div>
+            <textarea
+              name="text-area"
+              id="text-area"
+              class="custom-box"
+              cols="30"
+              rows="4"
+              required
+            ></textarea>
+          </div>
           <button
             type="submit"
             class="bg-green-500 p-2 font-semibold text-white rounded w-full hover:bg-green-600"
           >
             Create Pickup
           </button>
-        </div>
+        </form>
       </div>
-      <div class="bg-white p-5 rounded max-w-lg mx-auto mt-2">
+      <div class="bg-white p-5 rounded max-w-lg mx-auto mt-2 hidden">
         <h4 class="font-semibold text-xl">Courier Request</h4>
         <div class="my-5 space-y-5">
           <table class="table table-fixed border w-full">
@@ -47,7 +66,7 @@
               <th class="px-2 py-1 border">Addrss</th>
               <th class="px-2 py-1 border w-20"></th>
             </tr>
-            <tr class="text-center">
+            <tr class="text-center text-sm">
               <td class="px-2 py-1 border">Mr. Hari</td>
               <td class="px-2 py-1 border">30 Nov, 2024</td>
               <td class="px-2 py-1 border">Salem</td>
@@ -63,5 +82,7 @@
         </div>
       </div>
     </div>
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+    <script src="./assets/main.js"></script>
   </body>
 </html>
