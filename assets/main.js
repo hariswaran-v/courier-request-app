@@ -1,20 +1,21 @@
-const validate = new JustValidate("#courier-req-form", {
-  errorLabelCssClass: "form-error", // ✅ Set globally instead of for each field
+const formEl = document.getElementById("courier-request");
+
+const validateForm = new JustValidate(formEl, {
+  errorLabelCssClass: "form-error",
 });
 
-validate
-  .addField("#name", [
-    { rule: "required" },
-    { rule: "minLength", value: 3 },
-    { rule: "maxLength", value: 20 },
-  ])
-  .addField("#mobile", [
-    { rule: "required" },
-    { rule: "number" }, // ✅ Corrected "number" to "numeric"
-    { rule: "minLength", value: 10 },
-    { rule: "maxLength", value: 10 },
-  ]);
-
-validate.addField("#date", [{ rule: "required" }]);
-validate.addField("#text-area", [{ rule: "required" }]);
-console.log(validate);
+validateForm.addField("#name", [
+  { rule: "required" },
+  { rule: "minLength", value: 3 },
+  { rule: "maxLength", value: 30 },
+]);
+validateForm.addField("#mobile", [
+  { rule: "required" },
+  { rule: "customRegexp", value: /^[0-9]{10}$/ },
+]);
+validateForm.addField("#date-time", [
+  { rule: "required", errorMessage: "Date and time is required" },
+]);
+validateForm.addField("#text-area", [
+  { rule: "required", errorMessage: "Date and time is required" },
+]);
