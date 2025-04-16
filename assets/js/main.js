@@ -2,6 +2,7 @@ const formEl = document.getElementById("courier-request");
 
 const validateForm = new JustValidate(formEl, {
   errorLabelCssClass: "form-error",
+  validateBeforeSubmitting: true,
 });
 
 validateForm.addField("#name", [
@@ -19,3 +20,11 @@ validateForm.addField("#date-time", [
 validateForm.addField("#text-area", [
   { rule: "required", errorMessage: "Date and time is required" },
 ]);
+
+validateForm.onSuccess((e) => {
+  e.preventDefault();
+  const formData = new FormData(formEl);
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`);
+  }
+});
