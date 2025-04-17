@@ -29,11 +29,9 @@ validateForm.onSuccess(() => {
   // for (let [key, value] of formData.entries()) {
   //   console.log(`${key}: ${value}`);
   // }
-
   const formValueObj = Object.fromEntries(formData.entries());
 
   const newCourierData = [];
-
   //Get existing LocalStorage value, it it's exist!
   const existingCourierData = localStorage.getItem(localStorageKey);
   // console.log(existingCourierData);
@@ -53,7 +51,6 @@ validateForm.onSuccess(() => {
   alert("Courier Request submitted successfully");
   formEl.reset();
 });
-
 //show the submitted value on the bottom of the table
 function getAllCoureirDatas() {
   const courierData = localStorage.getItem(localStorageKey);
@@ -74,6 +71,8 @@ function getAllCoureirDatas() {
       const tdEl5 = document.createElement("td");
       const deleteBtnEl = document.createElement("button");
 
+      trEl.classList.add("text-sm");
+
       tdEl1.classList.add("px-2", "py-1", "border");
       tdEl1.textContent = courierData.name;
 
@@ -81,7 +80,7 @@ function getAllCoureirDatas() {
       tdEl2.textContent = courierData.mobile;
 
       tdEl3.classList.add("px-2", "py-1", "border");
-      tdEl3.textContent = courierData["pickup-date"];
+      tdEl3.textContent = formatMyDate(courierData["pickup-date"]);
 
       tdEl4.classList.add("px-2", "py-1", "border");
       tdEl4.textContent = courierData["pickup-area"];
