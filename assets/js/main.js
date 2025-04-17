@@ -60,38 +60,45 @@ function getAllCoureirDatas() {
   const courierDataArr = JSON.parse(courierData);
   // console.log(courierDataArr);
   if (courierDataArr) {
+    const courierCardEl = document.querySelector("#courierCard");
+    courierCardEl.classList.remove("hidden");
     const tableEl = document.getElementById("courierDataTable");
 
+    const newFinalValue = [];
     const finalData = courierDataArr.map((courierData) => {
-      return `
-    <tr>
-      <td class="px-2 py-1 border text-sm">${courierData.name}</td>
-      <td class="px-2 py-1 border">${courierData.mobile}</td>
-      <td class="px-2 py-1 border text-sm">${courierData["pickup-date"]}</td>
-      <td class="px-2 py-1 border text-sm">${courierData["pickup-area"]}</td>
-      <td class="px-2 py-1 border">
-        <button class="bg-red-500 px-2 py-1 rounded hover:bg-red-600 text-white text-sm">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-          >
-            <!-- Icon from Google Material Icons -->
-            <path
-              fill="currentColor"
-              d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"
-            />
-          </svg>
-        </button>
-      </td>
-    </tr>
-  `;
-    });
-    //appending the value inside of the table row
-    console.log(finalData);
+      const trEl = document.createElement("tr");
+      const tdEl1 = document.createElement("td");
+      const tdEl2 = document.createElement("td");
+      const tdEl3 = document.createElement("td");
+      const tdEl4 = document.createElement("td");
+      const tdEl5 = document.createElement("td");
+      const deleteBtnEl = document.createElement("button");
 
-    tableEl.innerHTML += finalData.join("");
+      tdEl1.classList.add("px-2", "py-1", "border");
+      tdEl1.textContent = courierData.name;
+
+      tdEl2.classList.add("px-2", "py-1", "border");
+      tdEl2.textContent = courierData.mobile;
+
+      tdEl3.classList.add("px-2", "py-1", "border");
+      tdEl3.textContent = courierData["pickup-date"];
+
+      tdEl4.classList.add("px-2", "py-1", "border");
+      tdEl4.textContent = courierData["pickup-area"];
+
+      deleteBtnEl.className =
+        "px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-sm rounded";
+      deleteBtnEl.textContent = "Delete";
+
+      tdEl5.classList.add("px-2", "py-1", "border");
+      tdEl5.append(deleteBtnEl);
+
+      trEl.append(tdEl1, tdEl2, tdEl3, tdEl4, tdEl5);
+      newFinalValue.push(trEl);
+    });
+
+    //appending the value inside of the table row
+    newFinalValue.forEach((el) => tableEl.append(el));
   } else {
     console.log("No value available on localstorage");
   }
