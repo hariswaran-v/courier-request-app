@@ -36,16 +36,16 @@
           <div>
             <input
               type="datetime-local"
-              name="date-time"
+              name="pickup-date"
               class="custom-box"
               required
-              id="date-time"
+              id="pickup-date"
             />
           </div>
           <div>
             <textarea
-              name="text-area"
-              id="text-area"
+              name="pickup-area"
+              id="pickup-area"
               class="custom-box"
               cols="30"
               rows="4"
@@ -60,38 +60,19 @@
           </button>
         </form>
       </div>
-      <div class="bg-white p-5 rounded max-w-lg mx-auto mt-2 hidden">
+      <div class="bg-white p-5 rounded max-w-6xl mx-auto mt-5">
         <h4 class="font-semibold text-xl">Courier Request</h4>
         <div class="my-5 space-y-5">
-          <table class="table table-fixed border w-full">
+          <table
+            class="table table-fixed border w-full text-center"
+            id="courierDataTable"
+          >
             <tr>
               <th class="px-2 py-1 border">Customer</th>
-              <th class="px-2 py-1 border">PickUp Date</th>
-              <th class="px-2 py-1 border">Addrss</th>
-              <th class="px-2 py-1 border w-20"></th>
-            </tr>
-            <tr class="text-center text-sm">
-              <td class="px-2 py-1 border">Mr. Hari</td>
-              <td class="px-2 py-1 border">30 Nov, 2024</td>
-              <td class="px-2 py-1 border">Salem</td>
-              <td class="px-2 py-1 border text-center">
-                <button
-                  class="bg-red-500 px-2 py-1 rounded hover:bg-red-600 text-white text-sm"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                  >
-                    <!-- Icon from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE -->
-                    <path
-                      fill="currentColor"
-                      d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"
-                    />
-                  </svg>
-                </button>
-              </td>
+              <th class="px-2 py-1 border">Mobile</th>
+              <th class="px-2 py-1 border">Pickup date</th>
+              <th class="px-2 py-1 border">Pickup address</th>
+              <th class="px-2 py-1 border"></th>
             </tr>
           </table>
         </div>
@@ -99,7 +80,5 @@
     </div>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
     <script type="module" src="./assets/js/main.js"></script>
-    <script type="module" src="./assets/js/validation.js"></script>
   </body>
 </html>
- 
