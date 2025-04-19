@@ -6,7 +6,6 @@ const validateForm = new JustValidate(formEl, {
   errorLabelCssClass: "form-error",
   validateBeforeSubmitting: true,
 });
-``;
 validateForm.addField("#name", [
   { rule: "required" },
   { rule: "minLength", value: 3 },
@@ -30,6 +29,7 @@ validateForm.onSuccess(() => {
   //   console.log(`${key}: ${value}`);
   // }
   const formValueObj = Object.fromEntries(formData.entries());
+  console.log(formValueObj);
 
   const newCourierData = [];
   //Get existing LocalStorage value, it it's exist!
@@ -48,7 +48,8 @@ validateForm.onSuccess(() => {
     newCourierData.push(formValueObj);
     localStorage.setItem(localStorageKey, JSON.stringify(newCourierData));
   }
-  alert("Courier Request submitted successfully");
+  // alert("Courier Request submitted successfully");
+  getAllCoureirDatas();
   formEl.reset();
 });
 //show the submitted value on the bottom of the table
@@ -59,40 +60,48 @@ function getAllCoureirDatas() {
   if (courierDataArr) {
     const courierCardEl = document.querySelector("#courierCard");
     courierCardEl.classList.remove("hidden");
-    const tableEl = document.getElementById("courierDataTable");
+
+    const tableEl = document.getElementById("courierDataTableBody");
+
+    tableEl.innerHTML = "";
 
     const newFinalValue = [];
-    const finalData = courierDataArr.map((courierData) => {
+
+    const finalData = courierDataArr.map((courierData, index) => {
       const trEl = document.createElement("tr");
       const tdEl1 = document.createElement("td");
       const tdEl2 = document.createElement("td");
       const tdEl3 = document.createElement("td");
       const tdEl4 = document.createElement("td");
       const tdEl5 = document.createElement("td");
+      const tdEl6 = document.createElement("td");
       const deleteBtnEl = document.createElement("button");
 
       trEl.classList.add("text-sm");
 
       tdEl1.classList.add("px-2", "py-1", "border");
-      tdEl1.textContent = courierData.name;
+      tdEl1.textContent = index + 1;
 
       tdEl2.classList.add("px-2", "py-1", "border");
-      tdEl2.textContent = courierData.mobile;
+      tdEl2.textContent = courierData.name;
 
       tdEl3.classList.add("px-2", "py-1", "border");
-      tdEl3.textContent = formatMyDate(courierData["pickup-date"]);
+      tdEl3.textContent = courierData.mobile;
 
       tdEl4.classList.add("px-2", "py-1", "border");
-      tdEl4.textContent = courierData["pickup-area"];
+      tdEl4.textContent = formatMyDate(courierData["pickup-date"]);
+
+      tdEl5.classList.add("px-2", "py-1", "border");
+      tdEl5.textContent = courierData["pickup-area"];
 
       deleteBtnEl.className =
         "px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-sm rounded";
       deleteBtnEl.textContent = "Delete";
 
-      tdEl5.classList.add("px-2", "py-1", "border");
-      tdEl5.append(deleteBtnEl);
+      tdEl6.classList.add("px-2", "py-1", "border");
+      tdEl6.append(deleteBtnEl);
 
-      trEl.append(tdEl1, tdEl2, tdEl3, tdEl4, tdEl5);
+      trEl.append(tdEl1, tdEl2, tdEl3, tdEl4, tdEl5, tdEl6);
       newFinalValue.push(trEl);
     });
 

@@ -66,14 +66,19 @@
       >
         <h4 class="font-semibold text-xl">Courier Request</h4>
         <div class="my-5 space-y-5">
-          <table class="table sborder w-full text-center" id="courierDataTable">
-            <tr>
-              <th class="px-2 py-1 border">Customer</th>
-              <th class="px-2 py-1 border">Mobile</th>
-              <th class="px-2 py-1 border">Pickup date</th>
-              <th class="px-2 py-1 border">Pickup address</th>
-              <th class="px-2 py-1 border w-fit">Action</th>
-            </tr>
+          <table class="table sborder w-full text-center">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-2 py-1 border">S.No</th>
+                <th class="px-2 py-1 border">Customer</th>
+                <th class="px-2 py-1 border">Mobile</th>
+                <th class="px-2 py-1 border">Pickup date</th>
+                <th class="px-2 py-1 border">Pickup address</th>
+                <th class="px-2 py-1 border w-fit">Action</th>
+              </tr>
+            </thead>
+            <tbody id="courierDataTableBody"></tbody>
+            <!-- ✅ DIFFERENT ID HERE -->
           </table>
         </div>
       </div>
