@@ -1,3 +1,4 @@
+const id = uuid.v4();
 const formEl = document.getElementById("courier-request");
 
 const localStorageKey = "courierData";
@@ -7,7 +8,7 @@ const validateForm = new JustValidate(formEl, {
   validateBeforeSubmitting: true,
 });
 validateForm.addField("#name", [
-  { rule: "required" },
+  { rule: "required", errorMessage: "Name is required" },
   { rule: "minLength", value: 3 },
   { rule: "maxLength", value: 30 },
 ]);
@@ -19,7 +20,13 @@ validateForm.addField("#pickup-date", [
   { rule: "required", errorMessage: "Date and time is required" },
 ]);
 validateForm.addField("#pickup-area", [
-  { rule: "required", errorMessage: "Date and time is required" },
+  { rule: "required", errorMessage: "Pickup address is required" },
+]);
+validateForm.addField("#agreements", [
+  {
+    rule: "required",
+    errorMessage: "You need to accept the terms and conditions.",
+  },
 ]);
 
 validateForm.onSuccess(() => {
@@ -29,7 +36,9 @@ validateForm.onSuccess(() => {
   //   console.log(`${key}: ${value}`);
   // }
   const formValueObj = Object.fromEntries(formData.entries());
-  console.log(formValueObj);
+  formValueObj.id = uuid.v4(); // Add UUID id
+
+  // console.log(formValueObj);
 
   const newCourierData = [];
   //Get existing LocalStorage value, it it's exist!
@@ -51,16 +60,17 @@ validateForm.onSuccess(() => {
   // alert("Courier Request submitted successfully");
   getAllCoureirDatas();
   formEl.reset();
+  alert("done");
 });
 //show the submitted value on the bottom of the table
 function getAllCoureirDatas() {
   const courierData = localStorage.getItem(localStorageKey);
   const courierDataArr = JSON.parse(courierData);
   // console.log(courierDataArr);
-  if (courierDataArr) {
-    const courierCardEl = document.querySelector("#courierCard");
-    courierCardEl.classList.remove("hidden");
 
+  const courierCardEl = document.querySelector("#courierCard");
+  courierCardEl.classList.remove("hidden");
+  if (courierDataArr && courierDataArr.length > 0) {
     const tableEl = document.getElementById("courierDataTableBody");
 
     tableEl.innerHTML = "";
@@ -97,6 +107,9 @@ function getAllCoureirDatas() {
       deleteBtnEl.className =
         "px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-sm rounded";
       deleteBtnEl.textContent = "Delete";
+      deleteBtnEl.addEventListener("click", (e) => {
+        deleteCourierRequest(courierData);
+      });
 
       tdEl6.classList.add("px-2", "py-1", "border");
       tdEl6.append(deleteBtnEl);
@@ -107,8 +120,32 @@ function getAllCoureirDatas() {
 
     //appending the value inside of the table row
     newFinalValue.forEach((el) => tableEl.append(el));
+
+    // show the count of courier list length in ui
+    const courierCountEl = document.querySelector("#courierCount");
+    courierCountEl.textContent = newFinalValue.length;
   } else {
-    console.log("No value available on localstorage");
+    courierCardEl.classList.add("hidden");
+
+    // console.log("No value available on localstorage");
   }
 }
+
+function deleteCourierRequest(courierRequest) {
+  const confirmation = confirm(
+    `Do you want to delete '${courierRequest["name"]}' record`
+  );
+
+  if (confirmation) {
+    const existingCourierData = localStorage.getItem(localStorageKey);
+    const courierDataObj = JSON.parse(existingCourierData);
+    const otherRecords = courierDataObj.filter(
+      (courierReq) => courierReq.id != courierRequest["id"]
+    );
+    // Push it localstorage again, this time, i'm deleting that record (courierRequestId)
+    localStorage.setItem(localStorageKey, JSON.stringify(otherRecords));
+    getAllCoureirDatas();
+  }
+}
+
 getAllCoureirDatas();

@@ -52,8 +52,12 @@
               required
             ></textarea>
           </div>
+          <div>
+            <input type="checkbox" id="agreements" />
+            <span>I accept all terms and conditions.</span>
+          </div>
           <button
-            name="pickup-area"
+            name="create-pickup"
             class="bg-green-500 p-2 font-semibold text-white rounded w-full hover:bg-green-600"
           >
             Create Pickup
@@ -64,7 +68,14 @@
         class="bg-white p-5 rounded max-w-6xl mx-auto mt-5 hidden"
         id="courierCard"
       >
-        <h4 class="font-semibold text-xl">Courier Request</h4>
+        <div class="flex items-center justify-cetner space-x-2">
+          <h4 class="font-semibold text-xl">Courier Request</h4>
+          <span
+            class="bg-green-500 px-2 py-0.5 text-white rounded-full text-sm font-semibold w-6 h-6 flex items-center justify-center"
+            id="courierCount"
+            >1</span
+          >
+        </div>
         <div class="my-5 space-y-5">
           <table class="table sborder w-full text-center">
             <thead class="bg-gray-100">
@@ -86,6 +97,7 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
     <script src="./assets/js/utils.js"></script>
-    <script type="module" src="./assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
+    <script src="./assets/js/main.js"></script>
   </body>
 </html>
